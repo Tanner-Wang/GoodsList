@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="@dimen/activity_margin"
+    tools:context=".EditorActivity">
+
+        <!-- Label -->
+        <TextView
+            android:text="@string/category_overview"
+            android:layout_gravity="center_horizontal"
+            style="@style/CategoryStyle" />
+
+        <!-- Input fields -->
+        <LinearLayout
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:paddingLeft="4dp"
+            android:orientation="vertical">
+
+            <!-- Name field -->
+            <EditText
+                android:id="@+id/edit_goods_name"
+                android:hint="@string/hint_goods_name"
+                android:inputType="textCapWords"
+                style="@style/EditorFieldStyle"/>
+
+            <!-- Amount field -->
+            <EditText
+                android:id="@+id/edit_goods_amount"
+                android:hint="@string/hint_goods_amount"
+                android:inputType="textCapWords"
+                style="@style/EditorFieldStyle"
+                android:digits="1234567890."
+                android:maxLines="1"/>
+
+            <!-- Price field -->
+            <EditText
+                android:id="@+id/edit_goods_price"
+                android:hint="@string/hint_goods_price"
+                android:inputType="textCapWords"
+                style="@style/EditorFieldStyle"
+                android:digits="1234567890."
+                android:maxLines="1"/>
+
+            <!-- Add goods field -->
+            <EditText
+                android:id="@+id/edit_add_goods_amount"
+                android:hint="@string/hint_add_goods_amount"
+                android:inputType="textCapWords"
+                style="@style/EditorFieldStyle"
+                android:digits="1234567890."
+                android:maxLines="1"/>
+
+            <!-- Cut back goods field -->
+            <EditText
+                android:id="@+id/edit_cut_back_goods_amount"
+                android:hint="@string/hint_cut_back_goods_amount"
+                android:inputType="textCapWords"
+                style="@style/EditorFieldStyle"
+                android:digits="1234567890."
+                android:maxLines="1"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/edit_sales_volume"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0"
+                    android:fontFamily="sans-serif-light"
+                    android:textAppearance="?android:textAppearanceMedium" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="  time(s) sell"
+                    android:fontFamily="sans-serif-light"
+                    android:textAppearance="?android:textAppearanceMedium" />
+
+            </LinearLayout>
+    </LinearLayout>
+
+    <ImageView
+        android:src="@mipmap/ic_launcher_round"
+        android:layout_gravity="center_horizontal"
+        android:layout_width="88dp"
+        android:layout_height="88dp"
+        android:scaleType="centerCrop"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <TextView
+            android:layout_width="54dp"
+            android:layout_height="42dp"
+            android:text="Order"
+            android:gravity="center"
+            android:id="@+id/order"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:background="@color/colorAccent"/>
+    </RelativeLayout>
+</LinearLayout>

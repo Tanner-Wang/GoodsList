@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Name for the application [CHAR LIMIT=12] -->
+    <string name="app_name">Goods List</string>
+
+    <!-- Label for overflow menu option that inserts fake pet data into the app [CHAR LIMIT=20] -->
+    <string name="action_insert_new_goods">Insert A New Goods</string>
+
+    <!-- Label for overflow menu option that deletes all pet data in the app [CHAR LIMIT=20] -->
+    <string name="action_delete_all_entries">Delete All Goods</string>
+
+    <!-- Title text for the empty view, which describes the empty dog house image [CHAR LIMIT=50] -->
+    <string name="empty_view_title_text">It\'s a bit lonely here…</string>
+
+    <!-- Subtitle text for the empty view that prompts the user to add a pet [CHAR LIMIT=50] -->
+    <string name="empty_view_subtitle_text">Get started by adding a goods</string>
+
+    <!-- Title for the activity to add a new goods [CHAR LIMIT=20] -->
+    <string name="editor_activity_title_new_goods">Add a Goods</string>
+
+    <!-- Title for the activity to edit an existing goods [CHAR LIMIT=20] -->
+    <string name="editor_activity_title_edit_goods">Edit goods</string>
+
+    <!-- Label for editor menu option to save goods and leave editor [CHAR LIMIT=20] -->
+    <string name="action_save">Save</string>
+
+    <!-- Label for editor overflow menu option that deletes the current goods [CHAR LIMIT=20] -->
+    <string name="action_delete">Delete</string>
+
+    <!-- Toast message in editor when new goods has been successfully inserted [CHAR LIMIT=NONE] -->
+    <string name="editor_insert_goods_successful">Goods saved</string>
+
+    <!-- Toast message in editor when new goods has failed to be inserted [CHAR LIMIT=NONE] -->
+    <string name="editor_insert_goods_failed">Error with saving goods</string>
+
+    <!-- Toast message in editor when current goods was successfully updated [CHAR LIMIT=NONE] -->
+    <string name="editor_update_goods_successful">Goods updated</string>
+
+    <!-- Toast message in editor when current goods has failed to be updated [CHAR LIMIT=NONE] -->
+    <string name="editor_update_goods_failed">Error with updating goods</string>
+
+    <!-- Dialog message when user is leaving editor but hasn't saved changes [CHAR LIMIT=NONE] -->
+    <string name="unsaved_changes_dialog_msg">Discard your changes and quit editing?</string>
+
+    <!-- Dialog button text for the option to discard a user's changes [CHAR LIMIT=20] -->
+    <string name="discard">Discard</string>
+
+    <!-- Dialog button text for the option to keep editing the current goods [CHAR LIMIT=20] -->
+    <string name="keep_editing">Keep Editing</string>
+
+    <!-- Toast message in editor when current goods was successfully deleted [CHAR LIMIT=NONE] -->
+    <string name="editor_delete_goods_successful">Goods deleted</string>
+
+    <!-- Toast message in editor when current goods has failed to be deleted [CHAR LIMIT=NONE] -->
+    <string name="editor_delete_goods_failed">Error with deleting goods</string>
+
+    <!-- Dialog message to ask the user to confirm deleting the current goods [CHAR LIMIT=NONE] -->
+    <string name="delete_dialog_msg">Delete this goods?</string>
+
+    <!-- Dialog button text for the option to confirm deleting the current goods [CHAR LIMIT=20] -->
+    <string name="delete">Delete</string>
+
+    <!-- Dialog button text for the option to cancel deletion of the current goods [CHAR LIMIT=20] -->
+    <string name="cancel">Cancel</string>
+
+    <!-- Label for overview category of attributes in the editor [CHAR LIMIT=30] -->
+    <string name="category_overview">Overview</string>
+
+    <!-- Label for gender information in the editor [CHAR LIMIT=30] -->
+    <string name="category_gender">Gender</string>
+
+    <!-- Label for measurement information in the editor [CHAR LIMIT=30] -->
+    <string name="category_measurement">Measurement</string>
+
+    <!-- Text hint for name field in the editor [CHAR LIMIT=30] -->
+    <string name="hint_goods_name">Name</string>
+
+    <!-- Text hint for amount field in the editor [CHAR LIMIT=30] -->
+    <string name="hint_goods_amount">Amount</string>
+
+    <!-- Text hint for price field in the editor [CHAR LIMIT=30] -->
+    <string name="hint_add_goods_amount">Add to amount</string>
+
+    <!-- Text hint for price field in the editor [CHAR LIMIT=30] -->
+    <string name="hint_cut_back_goods_amount">Cut back to amount</string>
+
+    <!-- Text hint for price field in the editor [CHAR LIMIT=30] -->
+    <string name="hint_goods_price">price</string>
+
+    <!-- Units for price of the goods (dollars) [CHAR LIMIT=5] -->
+    <string name="unit_goods_price">$</string>
+
+    <!-- Text for sales volume field in the editor [CHAR LIMIT=30] -->
+    <string name="text_goods_sales_volume">time(s) sell</string>
+
+    <!-- Text for sales volume field in the editor [CHAR LIMIT=30] -->
+    <string name="show_goods_sales_volume">0</string>
+
+
+</resources>

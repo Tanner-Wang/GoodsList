@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:paddingLeft="@dimen/activity_margin"
+    android:paddingRight="@dimen/activity_margin"
+    android:paddingTop="@dimen/activity_margin"
+    android:paddingBottom="@dimen/standard_padding">
+
+    <ImageView
+        android:id="@+id/picture"
+        android:layout_width="66dp"
+        android:layout_height="66dp"
+        android:scaleType="centerCrop"
+        android:src="@mipmap/ic_launcher_round"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="88dp"
+        android:layout_marginLeft="@dimen/activity_margin">
+
+        <TextView
+            android:id="@+id/name"
+            android:layout_centerHorizontal="true"
+            style="@style/ListItemStyle" />
+
+        <TextView
+            android:id="@+id/mAmount"
+            android:layout_below="@id/name"
+            style="@style/ListItemStyle"
+            android:text="amount:"/>
+
+        <TextView
+            android:id="@+id/amount"
+            style="@style/ListItemStyle"
+            android:layout_below="@id/name"
+            android:layout_toRightOf="@id/mAmount"/>
+
+        <TextView
+            android:id="@+id/mPrice"
+            android:layout_below="@id/name"
+            style="@style/ListItemStyle"
+            android:layout_toRightOf="@id/amount"
+            android:text="  price:"/>
+
+        <TextView
+            android:id="@+id/price"
+            style="@style/ListItemStyle"
+            android:layout_below="@id/name"
+            android:layout_toRightOf="@id/mPrice" />
+
+        <TextView
+            android:id="@+id/dollar"
+            style="@style/ListItemStyle"
+            android:text="$"
+            android:layout_below="@id/name"
+            android:layout_toRightOf="@id/price" />
+
+        <TextView
+            android:id="@+id/mSell"
+            android:layout_below="@id/name"
+            style="@style/ListItemStyle"
+            android:layout_toRightOf="@id/dollar"
+            android:text="  sales times:"/>
+
+        <TextView
+            android:id="@+id/sell"
+            style="@style/ListItemStyle"
+            android:layout_below="@id/name"
+            android:layout_toRightOf="@id/mSell" />
+
+        <TextView
+            android:id="@+id/to_sell"
+            android:text="SELL"
+            android:layout_width="48dp"
+            android:layout_height="32dp"
+            android:gravity="center"
+            android:background="#8BC34A"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"/>
+
+    </RelativeLayout>
+
+
+</LinearLayout>
