@@ -90,8 +90,8 @@ public class EditorActivity extends AppCompatActivity implements android.app.Loa
                 intent1.setData(Uri.parse("mailto:"));
                 intent1.putExtra(Intent.EXTRA_EMAIL, "manager@gmail.com");
                 intent1.putExtra(Intent.EXTRA_SUBJECT, "Order Summary");
-                intent1.putExtra(Intent.EXTRA_TEXT, "Goods' name:"+holder.mNameEditText.getText()
-                        +"\nOrderAmount:"+holder.mCutBackAmountEditText.getText());
+                intent1.putExtra(Intent.EXTRA_TEXT, "Goods' name:" + holder.mNameEditText.getText()
+                        + "\nOrderAmount:" + holder.mCutBackAmountEditText.getText());
                 if (intent1.resolveActivity(getPackageManager()) != null) {
                     startActivity(intent1);
                 }
@@ -164,11 +164,11 @@ public class EditorActivity extends AppCompatActivity implements android.app.Loa
 
             // Update the views on the screen with the values from the database
             holder.mNameEditText.setText(name);
-            holder.mAmountEditText.setText(""+amount);
-            holder.mPriceEditText.setText(""+price);
-            holder.mAddAmountEditText.setText(""+0);
-            holder.mCutBackAmountEditText.setText(""+0);
-            holder.mSalesVolume.setText(""+salesVolume);
+            holder.mAmountEditText.setText("" + amount);
+            holder.mPriceEditText.setText("" + price);
+            holder.mAddAmountEditText.setText("" + 0);
+            holder.mCutBackAmountEditText.setText("" + 0);
+            holder.mSalesVolume.setText("" + salesVolume);
 
         }
     }
@@ -195,10 +195,10 @@ public class EditorActivity extends AppCompatActivity implements android.app.Loa
         String cutBackString = holder.mCutBackAmountEditText.getText().toString().trim();
         int addInt = Integer.parseInt(addString);
         int cutBackInt = Integer.parseInt(cutBackString);
-        if (addInt>0){
+        if (addInt > 0) {
             amountInt += addInt;
         }
-        if (cutBackInt>0){
+        if (cutBackInt > 0) {
             amountInt -= cutBackInt;
         }
         String priceString = holder.mPriceEditText.getText().toString().trim();
@@ -213,8 +213,8 @@ public class EditorActivity extends AppCompatActivity implements android.app.Loa
             // No need to create ContentValues and no need to do any ContentProvider operations.
             return;
         }
-        if(amountInt<0){
-            Toast.makeText(this,"The amount is less than 0",Toast.LENGTH_SHORT).show();
+        if (amountInt < 0) {
+            Toast.makeText(this, "The amount is less than 0", Toast.LENGTH_SHORT).show();
             return;
         }
 
@@ -225,13 +225,6 @@ public class EditorActivity extends AppCompatActivity implements android.app.Loa
         values.put(GoodsEntry.COLUMN_GOODS_AMOUNT, (String.valueOf(amountInt)));
         values.put(GoodsEntry.COLUMN_GOODS_PRICE, priceString);
         values.put(GoodsEntry.COLUMN_SALES_VOLUME, salesVolumeString);
-        // If the price is not provided by the user, don't try to parse the string into an
-        // integer value. Use 0 by default.
-//        int price = 0;
-//        if (!TextUtils.isEmpty(priceString)) {
-//            price = Integer.parseInt(priceString);
-//        }
-//        values.put(GoodsEntry.COLUMN_GOODS_PRICE, price);
 
         // Determine if this is a new or existing goods by checking if mCurrentGoodsUri is null or not
         if (mCurrentGoodsUri == null) {

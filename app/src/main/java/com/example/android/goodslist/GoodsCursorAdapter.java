@@ -51,30 +51,30 @@ public class GoodsCursorAdapter extends CursorAdapter {
         final int mAmount = Integer.parseInt(goodsAmount);
         final int mSalesVolume = Integer.parseInt(goodsSalesVolume);
 
-            toSellTextView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
+        toSellTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
 
-                    if (mAmount >0) {
+                if (mAmount > 0) {
 
-                        Uri uri = ContentUris.withAppendedId(GoodsEntry.CONTENT_URI, (mId + 1));
-                        ContentValues values = new ContentValues();
-                        values.put(GoodsEntry.COLUMN_GOODS_AMOUNT, mAmount - 1);
-                        values.put(GoodsEntry.COLUMN_SALES_VOLUME, mSalesVolume + 1);
-                        int rowsAffected = context.getContentResolver().update(uri, values, null, null);
-                    }
+                    Uri uri = ContentUris.withAppendedId(GoodsEntry.CONTENT_URI, (mId + 1));
+                    ContentValues values = new ContentValues();
+                    values.put(GoodsEntry.COLUMN_GOODS_AMOUNT, mAmount - 1);
+                    values.put(GoodsEntry.COLUMN_SALES_VOLUME, mSalesVolume + 1);
+                    int rowsAffected = context.getContentResolver().update(uri, values, null, null);
                 }
-            });
+            }
+        });
 
 
-            // Update the TextViews with the attributes for the current goods
-            nameTextView.setText(goodsName);
-            amountTextView.setText(goodsAmount);
-            priceTextView.setText(goodsPrice);
-            salesVolumeTextView.setText(goodsSalesVolume);
-
-
-        }
+        // Update the TextViews with the attributes for the current goods
+        nameTextView.setText(goodsName);
+        amountTextView.setText(goodsAmount);
+        priceTextView.setText(goodsPrice);
+        salesVolumeTextView.setText(goodsSalesVolume);
 
 
     }
+
+
+}

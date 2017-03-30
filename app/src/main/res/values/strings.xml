@@ -96,5 +96,14 @@
     <!-- Text for sales volume field in the editor [CHAR LIMIT=30] -->
     <string name="show_goods_sales_volume">0</string>
 
+    <string name="amount_string">amount:</string>
+    <string name="price_string">  price:</string>
+    <string name="dollar_string">$</string>
+    <string name="sales_times_string">  sales time(s):</string>
+    <string name="sell_string">SELL</string>
+    <string name="the_number_0">0</string>
+    <string name="times_sell_string">  time(s) sell</string>
+    <string name="order_string">ORDER</string>
+    <string name="add_new_goods_button">NEW</string>
 
 </resources>

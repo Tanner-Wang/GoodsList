@@ -6,5 +6,14 @@
     <!-- Common margin value used throughout the app -->
     <dimen name="activity_margin">16dp</dimen>
 
-    <dimen name="standard_padding">6dp</dimen>
+    <dimen name="standard_padding">4dp</dimen>
+    <dimen name="list_image">66dp</dimen>
+    <dimen name="item_size">88dp</dimen>
+    <dimen name="sell_button_width">48dp</dimen>
+    <dimen name="sell_button_height">32dp</dimen>
+    <dimen name="order_button_width">54dp</dimen>
+    <dimen name="order_button_height">42dp</dimen>
+    <dimen name="subtitle_padding_top">8dp</dimen>
+    <dimen name="fab_button_width">56dp</dimen>
+    <dimen name="fab_button_height">44dp</dimen>
 </resources>

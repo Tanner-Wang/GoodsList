@@ -46,22 +46,22 @@ public class CatalogActivity extends AppCompatActivity implements android.app.Lo
         holder.emptyView = findViewById(R.id.empty_view);
         holder.goodsListView.setEmptyView(holder.emptyView);
 
-        mCursorAdapter = new GoodsCursorAdapter(this,null);
+        mCursorAdapter = new GoodsCursorAdapter(this, null);
         holder.goodsListView.setAdapter(mCursorAdapter);
 
         holder.goodsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
-                Intent intent = new Intent(CatalogActivity.this,EditorActivity.class);
+                Intent intent = new Intent(CatalogActivity.this, EditorActivity.class);
                 //形成被点击的特定goods的Content Uri并将id包含在其后面
-                Uri currentGoodsUri = ContentUris.withAppendedId(GoodsEntry.CONTENT_URI,id);
+                Uri currentGoodsUri = ContentUris.withAppendedId(GoodsEntry.CONTENT_URI, id);
                 intent.setData(currentGoodsUri);
                 startActivity(intent);
             }
         });
 
 
-        getLoaderManager().initLoader(GOODS_LOADER,null,this);
+        getLoaderManager().initLoader(GOODS_LOADER, null, this);
     }
 
     static class ViewHolder {

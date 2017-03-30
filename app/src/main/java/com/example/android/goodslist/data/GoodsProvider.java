@@ -8,6 +8,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.util.Log;
+
 import com.example.android.goodslist.data.GoodsContract.GoodsEntry;
 
 public class GoodsProvider extends ContentProvider {
@@ -57,7 +58,7 @@ public class GoodsProvider extends ContentProvider {
             default:
                 throw new IllegalArgumentException("Cannot query unknown uri " + uri);
         }
-        cursor.setNotificationUri(getContext().getContentResolver(),uri);
+        cursor.setNotificationUri(getContext().getContentResolver(), uri);
         return cursor;
     }
 
@@ -96,7 +97,7 @@ public class GoodsProvider extends ContentProvider {
 
         // Check that the amount is valid
         Integer amount = values.getAsInteger(GoodsEntry.COLUMN_GOODS_AMOUNT);
-        if (amount != null && amount <0) {
+        if (amount != null && amount < 0) {
             throw new IllegalArgumentException("Goods requires valid amount");
         }
 
@@ -120,7 +121,7 @@ public class GoodsProvider extends ContentProvider {
             return null;
         }
 
-        getContext().getContentResolver().notifyChange(uri,null);
+        getContext().getContentResolver().notifyChange(uri, null);
 
         // Return the new URI with the ID (of the newly inserted row) appended at the end
         return ContentUris.withAppendedId(uri, id);
@@ -196,7 +197,7 @@ public class GoodsProvider extends ContentProvider {
         // check that the amount value is valid.
         if (values.containsKey(GoodsEntry.COLUMN_GOODS_AMOUNT)) {
             Integer amount = values.getAsInteger(GoodsEntry.COLUMN_GOODS_AMOUNT);
-            if (amount != null && amount <0) {
+            if (amount != null && amount < 0) {
                 throw new IllegalArgumentException("Goods requires valid amount");
             }
         }
