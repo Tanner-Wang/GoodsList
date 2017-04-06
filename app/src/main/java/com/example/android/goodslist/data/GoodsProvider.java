@@ -28,7 +28,7 @@ public class GoodsProvider extends ContentProvider {
 
     static {
         sUriMatcher.addURI(GoodsContract.CONTENT_AUTHORITY, GoodsContract.PATH_GOODS, GOODS);
-        sUriMatcher.addURI(GoodsContract.CONTENT_AUTHORITY, GoodsContract.PATH_GOODS + "/#", GOODS);
+        sUriMatcher.addURI(GoodsContract.CONTENT_AUTHORITY, GoodsContract.PATH_GOODS + "/#", GOODS_ID);
     }
 
     @Override

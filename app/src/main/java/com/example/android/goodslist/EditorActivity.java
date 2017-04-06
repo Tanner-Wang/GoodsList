@@ -177,10 +177,10 @@ public class EditorActivity extends AppCompatActivity implements android.app.Loa
     public void onLoaderReset(android.content.Loader<Cursor> loader) {
 
         // If the loader is invalidated, clear out all the data from the input fields.
-        holder.mNameEditText.setText("");
-        holder.mAmountEditText.setText("");
-        holder.mPriceEditText.setText("");
-        holder.mSalesVolume.setText("");
+        holder.mNameEditText.setText(null);
+        holder.mAmountEditText.setText(null);
+        holder.mPriceEditText.setText(null);
+        holder.mSalesVolume.setText(null);
         holder.mAddAmountEditText.setText(String.valueOf(0));
         holder.mCutBackAmountEditText.setText(String.valueOf(0));
     }
@@ -190,9 +190,28 @@ public class EditorActivity extends AppCompatActivity implements android.app.Loa
         // Read from input fields
         // Use trim to eliminate leading or trailing white space
         String nameString = holder.mNameEditText.getText().toString().trim();
-        int amountInt = Integer.parseInt(holder.mAmountEditText.getText().toString().trim());
+        String amountString = holder.mAmountEditText.getText().toString().trim();
+        String priceString = holder.mPriceEditText.getText().toString().trim();
+        String salesVolumeString = holder.mSalesVolume.getText().toString().trim();
+        if (nameString==null){
+            Toast.makeText(this,"Goods' name cannot be null!",Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if (amountString==null){
+            Toast.makeText(this,"Goods' amount cannot be null!",Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if (priceString==null){
+            Toast.makeText(this,"Goods' price cannot be null!",Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if (salesVolumeString==null){
+            Toast.makeText(this,"Goods' salesVolume cannot be null!",Toast.LENGTH_SHORT).show();
+            return;
+        }
         String addString = holder.mAddAmountEditText.getText().toString().trim();
         String cutBackString = holder.mCutBackAmountEditText.getText().toString().trim();
+        int amountInt = Integer.parseInt(amountString);
         int addInt = Integer.parseInt(addString);
         int cutBackInt = Integer.parseInt(cutBackString);
         if (addInt > 0) {
@@ -201,8 +220,7 @@ public class EditorActivity extends AppCompatActivity implements android.app.Loa
         if (cutBackInt > 0) {
             amountInt -= cutBackInt;
         }
-        String priceString = holder.mPriceEditText.getText().toString().trim();
-        String salesVolumeString = holder.mSalesVolume.getText().toString().trim();
+
 
         // Check if this is supposed to be a new goods
         // and check if all the fields in the editor are blank

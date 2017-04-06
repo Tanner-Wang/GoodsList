@@ -57,7 +57,7 @@ public class GoodsCursorAdapter extends CursorAdapter {
 
                 if (mAmount > 0) {
 
-                    Uri uri = ContentUris.withAppendedId(GoodsEntry.CONTENT_URI, (mId + 1));
+                    Uri uri = ContentUris.withAppendedId(GoodsEntry.CONTENT_URI, (mId));
                     ContentValues values = new ContentValues();
                     values.put(GoodsEntry.COLUMN_GOODS_AMOUNT, mAmount - 1);
                     values.put(GoodsEntry.COLUMN_SALES_VOLUME, mSalesVolume + 1);
