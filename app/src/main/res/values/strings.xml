@@ -55,7 +55,10 @@
     <string name="editor_delete_goods_failed">Error with deleting goods</string>
 
     <!-- Dialog message to ask the user to confirm deleting the current goods [CHAR LIMIT=NONE] -->
-    <string name="delete_dialog_msg">Delete this goods?</string>
+    <string name="delete_dialog_msg1">Delete this goods?</string>
+
+    <!-- Dialog message to ask the user to confirm deleting all goods [CHAR LIMIT=NONE] -->
+    <string name="delete_dialog_msg2">Delete all goods?</string>
 
     <!-- Dialog button text for the option to confirm deleting the current goods [CHAR LIMIT=20] -->
     <string name="delete">Delete</string>

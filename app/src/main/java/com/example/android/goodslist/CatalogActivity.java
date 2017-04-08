@@ -2,11 +2,13 @@ package com.example.android.goodslist;
 
 import android.content.ContentUris;
 import android.content.CursorLoader;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.Loader;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -119,7 +121,7 @@ public class CatalogActivity extends AppCompatActivity implements android.app.Lo
                 return true;
             // Respond to a click on the "Delete all entries" menu option
             case R.id.action_delete_all_entries:
-                deleteAllGoods();
+                showDeleteConfirmationDialog();
                 return true;
         }
         return super.onOptionsItemSelected(item);
@@ -129,5 +131,33 @@ public class CatalogActivity extends AppCompatActivity implements android.app.Lo
         int rowsDeleted = getContentResolver().delete(GoodsEntry.CONTENT_URI, null, null);
     }
 
+    /**
+     * Prompt the user to confirm that they want to delete this goods.
+     */
+    private void showDeleteConfirmationDialog() {
+        // Create an AlertDialog.Builder and set the message, and click listeners
+        // for the positive and negative buttons on the dialog.
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage(R.string.delete_dialog_msg2);
+        builder.setPositiveButton(R.string.delete, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                // User clicked the "Delete" button, so delete the goods.
+                deleteAllGoods();
+            }
+        });
+        builder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                // User clicked the "Cancel" button, so dismiss the dialog
+                // and continue editing the goods.
+                if (dialog != null) {
+                    dialog.dismiss();
+                }
+            }
+        });
+
+        // Create and show the AlertDialog
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
+    }
 
 }

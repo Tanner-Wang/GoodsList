@@ -193,19 +193,19 @@ public class EditorActivity extends AppCompatActivity implements android.app.Loa
         String amountString = holder.mAmountEditText.getText().toString().trim();
         String priceString = holder.mPriceEditText.getText().toString().trim();
         String salesVolumeString = holder.mSalesVolume.getText().toString().trim();
-        if (nameString==null){
+        if (TextUtils.isEmpty(nameString)){
             Toast.makeText(this,"Goods' name cannot be null!",Toast.LENGTH_SHORT).show();
             return;
         }
-        if (amountString==null){
+        if (TextUtils.isEmpty(amountString)){
             Toast.makeText(this,"Goods' amount cannot be null!",Toast.LENGTH_SHORT).show();
             return;
         }
-        if (priceString==null){
+        if (TextUtils.isEmpty(priceString)){
             Toast.makeText(this,"Goods' price cannot be null!",Toast.LENGTH_SHORT).show();
             return;
         }
-        if (salesVolumeString==null){
+        if (TextUtils.isEmpty(salesVolumeString)){
             Toast.makeText(this,"Goods' salesVolume cannot be null!",Toast.LENGTH_SHORT).show();
             return;
         }
@@ -219,6 +219,7 @@ public class EditorActivity extends AppCompatActivity implements android.app.Loa
         }
         if (cutBackInt > 0) {
             amountInt -= cutBackInt;
+            salesVolumeString += 1;
         }
 
 
@@ -280,8 +281,7 @@ public class EditorActivity extends AppCompatActivity implements android.app.Loa
         }
     }
 
-
-    @Override
+     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu options from the res/menu/menu_editor.xml file.
         // This adds menu items to the app bar.
@@ -399,7 +399,7 @@ public class EditorActivity extends AppCompatActivity implements android.app.Loa
         // Create an AlertDialog.Builder and set the message, and click listeners
         // for the positive and negative buttons on the dialog.
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setMessage(R.string.delete_dialog_msg);
+        builder.setMessage(R.string.delete_dialog_msg2);
         builder.setPositiveButton(R.string.delete, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
                 // User clicked the "Delete" button, so delete the goods.

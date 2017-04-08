@@ -40,34 +40,32 @@
         <TextView
             android:id="@+id/mPrice"
             style="@style/ListItemStyle"
-            android:layout_below="@id/name"
-            android:layout_toRightOf="@id/amount"
+            android:layout_below="@id/amount"
             android:text="@string/price_string" />
 
         <TextView
             android:id="@+id/price"
             style="@style/ListItemStyle"
-            android:layout_below="@id/name"
+            android:layout_below="@id/amount"
             android:layout_toRightOf="@id/mPrice" />
 
         <TextView
             android:id="@+id/dollar"
             style="@style/ListItemStyle"
-            android:layout_below="@id/name"
+            android:layout_below="@id/amount"
             android:layout_toRightOf="@id/price"
             android:text="@string/dollar_string" />
 
         <TextView
             android:id="@+id/mSell"
             style="@style/ListItemStyle"
-            android:layout_below="@id/name"
-            android:layout_toRightOf="@id/dollar"
+            android:layout_below="@id/mPrice"
             android:text="@string/sales_times_string" />
 
         <TextView
             android:id="@+id/sell"
             style="@style/ListItemStyle"
-            android:layout_below="@id/name"
+            android:layout_below="@id/mPrice"
             android:layout_toRightOf="@id/mSell" />
 
         <TextView
