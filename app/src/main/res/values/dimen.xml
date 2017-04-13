@@ -8,7 +8,7 @@
 
     <dimen name="standard_padding">4dp</dimen>
     <dimen name="list_image">66dp</dimen>
-    <dimen name="item_size">88dp</dimen>
+    <dimen name="item_size">128dp</dimen>
     <dimen name="sell_button_width">48dp</dimen>
     <dimen name="sell_button_height">32dp</dimen>
     <dimen name="order_button_width">54dp</dimen>

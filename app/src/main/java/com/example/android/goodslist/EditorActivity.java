@@ -1,12 +1,19 @@
 package com.example.android.goodslist;
 
+import android.app.Activity;
 import android.content.ContentValues;
 import android.content.CursorLoader;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
+import android.provider.MediaStore;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -17,10 +24,17 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.android.goodslist.data.GoodsContract.GoodsEntry;
+
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 
 public class EditorActivity extends AppCompatActivity implements android.app.LoaderManager.LoaderCallbacks<Cursor> {
 
@@ -40,6 +54,9 @@ public class EditorActivity extends AppCompatActivity implements android.app.Loa
      * Boolean flag that keeps track of whether the goods has been edited (true) or not (false)
      */
     private boolean mGoodsHasChanged = false;
+
+    private int REQUEST_CAMERA = 0, SELECT_FILE = 1;
+    private String userChoosenTask;
 
     private View.OnTouchListener mTouchListener = new View.OnTouchListener() {
         @Override
@@ -98,6 +115,16 @@ public class EditorActivity extends AppCompatActivity implements android.app.Loa
             }
         });
 
+        holder.btnSelect = (TextView) findViewById(R.id.add_or_change_picture_button);
+        holder.btnSelect.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                selectImage();
+            }
+        });
+        holder.ivImage = (ImageView) findViewById(R.id.goods_picture);
+
 //         Setup OnTouchListeners on all the input fields, so we can determine if the user
 //         has touched or modified them. This will let us know if there are unsaved changes
 //         or not, if the user tries to leave the editor without saving.
@@ -118,6 +145,8 @@ public class EditorActivity extends AppCompatActivity implements android.app.Loa
         EditText mCutBackAmountEditText;
         TextView mSalesVolume;
         TextView mOrderButton;
+        TextView btnSelect;
+        ImageView ivImage;
     }
 
     @Override
@@ -129,7 +158,8 @@ public class EditorActivity extends AppCompatActivity implements android.app.Loa
                 GoodsEntry.COLUMN_GOODS_NAME,
                 GoodsEntry.COLUMN_GOODS_AMOUNT,
                 GoodsEntry.COLUMN_GOODS_PRICE,
-                GoodsEntry.COLUMN_SALES_VOLUME};
+                GoodsEntry.COLUMN_SALES_VOLUME,
+                GoodsEntry.COLUMN_GOODS_IMAGE};
 
         // This loader will execute the ContentProvider's query method on a background thread
         return new CursorLoader(this,   // Parent activity context
@@ -155,13 +185,15 @@ public class EditorActivity extends AppCompatActivity implements android.app.Loa
             int amountColumnIndex = cursor.getColumnIndex(GoodsEntry.COLUMN_GOODS_AMOUNT);
             int priceColumnIndex = cursor.getColumnIndex(GoodsEntry.COLUMN_GOODS_PRICE);
             int salesVolumeColumnIndex = cursor.getColumnIndex(GoodsEntry.COLUMN_SALES_VOLUME);
+            int imageColumnIndex = cursor.getColumnIndex(GoodsEntry.COLUMN_GOODS_IMAGE);
 
             // Extract out the value from the Cursor for the given column index
             String name = cursor.getString(nameColumnIndex);
             int amount = cursor.getInt(amountColumnIndex);
             float price = cursor.getFloat(priceColumnIndex);
             int salesVolume = cursor.getInt(salesVolumeColumnIndex);
-
+            byte[] in = cursor.getBlob(imageColumnIndex);
+            Bitmap bmpout = BitmapFactory.decodeByteArray(in, 0, in.length);
             // Update the views on the screen with the values from the database
             holder.mNameEditText.setText(name);
             holder.mAmountEditText.setText("" + amount);
@@ -169,9 +201,10 @@ public class EditorActivity extends AppCompatActivity implements android.app.Loa
             holder.mAddAmountEditText.setText("" + 0);
             holder.mCutBackAmountEditText.setText("" + 0);
             holder.mSalesVolume.setText("" + salesVolume);
-
+            holder.ivImage.setImageBitmap(bmpout);
         }
     }
+
 
     @Override
     public void onLoaderReset(android.content.Loader<Cursor> loader) {
@@ -183,6 +216,7 @@ public class EditorActivity extends AppCompatActivity implements android.app.Loa
         holder.mSalesVolume.setText(null);
         holder.mAddAmountEditText.setText(String.valueOf(0));
         holder.mCutBackAmountEditText.setText(String.valueOf(0));
+        holder.ivImage.setImageBitmap(null);
     }
 
 
@@ -193,20 +227,25 @@ public class EditorActivity extends AppCompatActivity implements android.app.Loa
         String amountString = holder.mAmountEditText.getText().toString().trim();
         String priceString = holder.mPriceEditText.getText().toString().trim();
         String salesVolumeString = holder.mSalesVolume.getText().toString().trim();
-        if (TextUtils.isEmpty(nameString)){
-            Toast.makeText(this,"Goods' name cannot be null!",Toast.LENGTH_SHORT).show();
+        Bitmap bitmap = ((BitmapDrawable) holder.ivImage.getDrawable()).getBitmap();
+        if (TextUtils.isEmpty(nameString)) {
+            Toast.makeText(this, "Goods' name cannot be null!", Toast.LENGTH_SHORT).show();
             return;
         }
-        if (TextUtils.isEmpty(amountString)){
-            Toast.makeText(this,"Goods' amount cannot be null!",Toast.LENGTH_SHORT).show();
+        if (TextUtils.isEmpty(amountString)) {
+            Toast.makeText(this, "Goods' amount cannot be null!", Toast.LENGTH_SHORT).show();
             return;
         }
-        if (TextUtils.isEmpty(priceString)){
-            Toast.makeText(this,"Goods' price cannot be null!",Toast.LENGTH_SHORT).show();
+        if (TextUtils.isEmpty(priceString)) {
+            Toast.makeText(this, "Goods' price cannot be null!", Toast.LENGTH_SHORT).show();
             return;
         }
-        if (TextUtils.isEmpty(salesVolumeString)){
-            Toast.makeText(this,"Goods' salesVolume cannot be null!",Toast.LENGTH_SHORT).show();
+        if (TextUtils.isEmpty(salesVolumeString)) {
+            Toast.makeText(this, "Goods' salesVolume cannot be null!", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if (bitmap == null) {
+            Toast.makeText(this, "Goods' picture cannot be null!", Toast.LENGTH_SHORT).show();
             return;
         }
         String addString = holder.mAddAmountEditText.getText().toString().trim();
@@ -237,6 +276,8 @@ public class EditorActivity extends AppCompatActivity implements android.app.Loa
             return;
         }
 
+        byte[] imgByte = img(bitmap);
+
         // Create a ContentValues object where column names are the keys,
         // and goods attributes from the editor are the values.
         ContentValues values = new ContentValues();
@@ -244,6 +285,7 @@ public class EditorActivity extends AppCompatActivity implements android.app.Loa
         values.put(GoodsEntry.COLUMN_GOODS_AMOUNT, (String.valueOf(amountInt)));
         values.put(GoodsEntry.COLUMN_GOODS_PRICE, priceString);
         values.put(GoodsEntry.COLUMN_SALES_VOLUME, salesVolumeString);
+        values.put(GoodsEntry.COLUMN_GOODS_IMAGE, imgByte);
 
         // Determine if this is a new or existing goods by checking if mCurrentGoodsUri is null or not
         if (mCurrentGoodsUri == null) {
@@ -281,12 +323,21 @@ public class EditorActivity extends AppCompatActivity implements android.app.Loa
         }
     }
 
-     @Override
+    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu options from the res/menu/menu_editor.xml file.
         // This adds menu items to the app bar.
         getMenuInflater().inflate(R.menu.menu_editor, menu);
         return true;
+    }
+
+    /**
+     * This method is called to Convert the image into bytecode.
+     */
+    public byte[] img(Bitmap bitmap) {
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 90, baos);
+        return baos.toByteArray();
     }
 
     /**
@@ -448,5 +499,111 @@ public class EditorActivity extends AppCompatActivity implements android.app.Loa
         finish();
     }
 
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        switch (requestCode) {
+            case Utility.MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE:
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    if (userChoosenTask.equals("Take Photo"))
+                        cameraIntent();
+                    else if (userChoosenTask.equals("Choose from Library"))
+                        galleryIntent();
+                } else {
+                    return;
+                }
+                break;
+        }
+    }
+
+    private void selectImage() {
+        final CharSequence[] items = {"Take Photo", "Choose from Library",
+                "Cancel"};
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(EditorActivity.this);
+        builder.setTitle("Add Photo!");
+        builder.setItems(items, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int item) {
+                boolean result = Utility.checkPermission(EditorActivity.this);
+
+                if (items[item].equals("Take Photo")) {
+                    userChoosenTask = "Take Photo";
+                    if (result)
+                        cameraIntent();
+
+                } else if (items[item].equals("Choose from Library")) {
+                    userChoosenTask = "Choose from Library";
+                    if (result)
+                        galleryIntent();
+
+                } else if (items[item].equals("Cancel")) {
+                    dialog.dismiss();
+                }
+            }
+        });
+        builder.show();
+    }
+
+    private void galleryIntent() {
+        Intent intent = new Intent();
+        intent.setType("image/*");
+        intent.setAction(Intent.ACTION_GET_CONTENT);//
+        startActivityForResult(Intent.createChooser(intent, "Select File"), SELECT_FILE);
+    }
+
+    private void cameraIntent() {
+        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        startActivityForResult(intent, REQUEST_CAMERA);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (resultCode == Activity.RESULT_OK) {
+            if (requestCode == SELECT_FILE)
+                onSelectFromGalleryResult(data);
+            else if (requestCode == REQUEST_CAMERA)
+                onCaptureImageResult(data);
+        }
+    }
+
+    private void onCaptureImageResult(Intent data) {
+        Bitmap thumbnail = (Bitmap) data.getExtras().get("data");
+        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+        thumbnail.compress(Bitmap.CompressFormat.JPEG, 90, bytes);
+
+        File destination = new File(Environment.getExternalStorageDirectory(),
+                System.currentTimeMillis() + ".jpg");
+
+        FileOutputStream fo;
+        try {
+            destination.createNewFile();
+            fo = new FileOutputStream(destination);
+            fo.write(bytes.toByteArray());
+            fo.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        holder.ivImage.setImageBitmap(thumbnail);
+    }
+
+    @SuppressWarnings("deprecation")
+    private void onSelectFromGalleryResult(Intent data) {
+
+        Bitmap bm = null;
+        if (data != null) {
+            try {
+                bm = MediaStore.Images.Media.getBitmap(getApplicationContext().getContentResolver(), data.getData());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+        holder.ivImage.setImageBitmap(bm);
+    }
 
 }

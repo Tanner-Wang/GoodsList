@@ -79,20 +79,36 @@
                 android:text="@string/times_sell_string"
                 android:textAppearance="?android:textAppearanceMedium" />
 
-        </LinearLayout>
-    </LinearLayout>
 
-    <ImageView
-        android:layout_width="@dimen/item_size"
-        android:layout_height="@dimen/item_size"
-        android:layout_gravity="center_horizontal"
-        android:scaleType="centerCrop"
-        android:src="@mipmap/ic_launcher_round" />
+        </LinearLayout>
+
+    </LinearLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1">
+        android:layout_height="wrap_content">
+
+
+        <TextView
+            android:id="@+id/add_or_change_picture_button"
+            android:layout_width="64dp"
+            android:padding="6dp"
+            android:background="@color/colorAccent"
+            android:gravity="center"
+            android:layout_height="wrap_content"
+            android:text="Picture"/>
+
+    <ImageView
+        android:id="@+id/goods_picture"
+        android:layout_width="@dimen/item_size"
+        android:layout_height="@dimen/item_size"
+        android:layout_centerHorizontal="true"
+        android:scaleType="centerCrop"/>
+
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
         <TextView
             android:id="@+id/order"

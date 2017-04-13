@@ -31,6 +31,7 @@ public final class GoodsContract {
         public static final String COLUMN_GOODS_AMOUNT = "amount";
         public static final String COLUMN_GOODS_PRICE = "price";
         public static final String COLUMN_SALES_VOLUME = "sell";
+        public static final String COLUMN_GOODS_IMAGE = "image";
 
 
     }

@@ -6,9 +6,6 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import com.example.android.goodslist.data.GoodsContract.GoodsEntry;
 
-/**
- * Created by Administrator on 2017/3/29.
- */
 
 public final class GoodsDbHelper extends SQLiteOpenHelper {
 
@@ -26,7 +23,8 @@ public final class GoodsDbHelper extends SQLiteOpenHelper {
                 + GoodsEntry.COLUMN_GOODS_NAME + " TEXT NOT NULL, "
                 + GoodsEntry.COLUMN_GOODS_AMOUNT + " INTEGER DEFAULT 0, "
                 + GoodsEntry.COLUMN_GOODS_PRICE + " REAL NOT NULL DEFAULT 0, "
-                + GoodsEntry.COLUMN_SALES_VOLUME + " INTEGER NOT NULL DEFAULT 0);";
+                + GoodsEntry.COLUMN_SALES_VOLUME + " INTEGER NOT NULL DEFAULT 0, "
+                + GoodsEntry.COLUMN_GOODS_IMAGE + " BLOB)";
         db.execSQL(SQL_CREATE_GOODS_TABLE);
     }
 

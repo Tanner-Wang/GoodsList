@@ -34,7 +34,6 @@ public class GoodsProvider extends ContentProvider {
     @Override
     public boolean onCreate() {
         mDbHelper = new GoodsDbHelper(getContext());
-
         return true;
     }
 
@@ -105,6 +104,12 @@ public class GoodsProvider extends ContentProvider {
         Float price = values.getAsFloat(GoodsEntry.COLUMN_GOODS_PRICE);
         if (price != null && price < 0) {
             throw new IllegalArgumentException("Goods requires valid price");
+        }
+
+        // Check that the image is valid
+        byte[] image = values.getAsByteArray(GoodsEntry.COLUMN_GOODS_IMAGE);
+        if (image == null) {
+            throw new IllegalArgumentException("Goods requires valid image");
         }
 
         // The sales volume is not need to check
@@ -207,6 +212,14 @@ public class GoodsProvider extends ContentProvider {
             // Check that the price is greater than or equal to 0 kg
             Float price = values.getAsFloat(GoodsEntry.COLUMN_GOODS_PRICE);
             if (price != null && price < 0) {
+                throw new IllegalArgumentException("Pet requires valid weight");
+            }
+        }
+
+        // check that the image value is valid.
+        if (values.containsKey(GoodsEntry.COLUMN_GOODS_IMAGE)) {
+            byte[] image = values.getAsByteArray(GoodsEntry.COLUMN_GOODS_IMAGE);
+            if (image == null) {
                 throw new IllegalArgumentException("Pet requires valid weight");
             }
         }

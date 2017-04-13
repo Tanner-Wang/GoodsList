@@ -81,6 +81,7 @@ public class CatalogActivity extends AppCompatActivity implements android.app.Lo
                 GoodsEntry.COLUMN_GOODS_AMOUNT,
                 GoodsEntry.COLUMN_GOODS_PRICE,
                 GoodsEntry.COLUMN_SALES_VOLUME,
+                GoodsEntry.COLUMN_GOODS_IMAGE
         };
 
         return new CursorLoader(this,

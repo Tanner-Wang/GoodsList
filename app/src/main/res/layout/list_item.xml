@@ -9,11 +9,10 @@
     android:paddingTop="@dimen/activity_margin">
 
     <ImageView
-        android:id="@+id/picture"
+        android:id="@+id/list_goods_picture"
         android:layout_width="@dimen/list_image"
         android:layout_height="@dimen/list_image"
-        android:scaleType="centerCrop"
-        android:src="@mipmap/ic_launcher_round" />
+        android:scaleType="centerCrop"/>
 
     <RelativeLayout
         android:layout_width="match_parent"
