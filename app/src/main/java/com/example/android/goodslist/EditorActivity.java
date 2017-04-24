@@ -227,7 +227,7 @@ public class EditorActivity extends AppCompatActivity implements android.app.Loa
         String amountString = holder.mAmountEditText.getText().toString().trim();
         String priceString = holder.mPriceEditText.getText().toString().trim();
         String salesVolumeString = holder.mSalesVolume.getText().toString().trim();
-        Bitmap bitmap = ((BitmapDrawable) holder.ivImage.getDrawable()).getBitmap();
+
         if (TextUtils.isEmpty(nameString)) {
             Toast.makeText(this, "Goods' name cannot be null!", Toast.LENGTH_SHORT).show();
             return;
@@ -244,10 +244,14 @@ public class EditorActivity extends AppCompatActivity implements android.app.Loa
             Toast.makeText(this, "Goods' salesVolume cannot be null!", Toast.LENGTH_SHORT).show();
             return;
         }
-        if (bitmap == null) {
+        //与字符串的空检测不同，图片的空检测应该先调用getDrawable()，
+        //如果结果不为空，再调用getBitmap()，因为有可能在调用getBitmap()而结果为空的时候导致应用崩溃。
+        if (holder.ivImage.getDrawable() == null) {
             Toast.makeText(this, "Goods' picture cannot be null!", Toast.LENGTH_SHORT).show();
             return;
         }
+        Bitmap bitmap = ((BitmapDrawable) holder.ivImage.getDrawable()).getBitmap();
+
         String addString = holder.mAddAmountEditText.getText().toString().trim();
         String cutBackString = holder.mCutBackAmountEditText.getText().toString().trim();
         int amountInt = Integer.parseInt(amountString);
@@ -589,7 +593,7 @@ public class EditorActivity extends AppCompatActivity implements android.app.Loa
         }
 
         holder.ivImage.setImageBitmap(thumbnail);
-    }
+        }
 
     @SuppressWarnings("deprecation")
     private void onSelectFromGalleryResult(Intent data) {
@@ -604,6 +608,6 @@ public class EditorActivity extends AppCompatActivity implements android.app.Loa
         }
 
         holder.ivImage.setImageBitmap(bm);
-    }
+        }
 
 }
