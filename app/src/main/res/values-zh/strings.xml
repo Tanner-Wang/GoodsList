@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">货物清单</string>
+    <string name="action_delete">删除</string>
+    <string name="action_delete_all_entries">删除所有</string>
+    <string name="action_insert_new_goods">插入新货物</string>
+    <string name="action_save">保存</string>
+    <string name="add_new_goods_button">新建</string>
+    <string name="cancel">取消</string>
+    <string name="delete_dialog_msg1">删除此货物？</string>
+    <string name="delete_dialog_msg2">删除所有？</string>
+    <string name="editor_activity_title_edit_goods">编辑</string>
+    <string name="editor_activity_title_new_goods">添加</string>
+    <string name="editor_delete_goods_failed">删除出错</string>
+    <string name="editor_delete_goods_successful">货物已删除</string>
+    <string name="editor_insert_goods_failed">保存出错</string>
+    <string name="editor_insert_goods_successful">已保存</string>
+    <string name="editor_update_goods_failed">更新出错</string>
+    <string name="editor_update_goods_successful">已更新</string>
+    <string name="empty_view_subtitle_text">开始添加新货物</string>
+    <string name="empty_view_title_text">这里有点冷清...</string>
+    <string name="hint_add_goods_amount">入货量</string>
+    <string name="hint_cut_back_goods_amount">出货量</string>
+    <string name="hint_goods_amount">库存</string>
+    <string name="hint_goods_name">名称</string>
+    <string name="hint_goods_price">单价</string>
+    <string name="keep_editing">继续编辑</string>
+    <string name="order_string">下单</string>
+    <string name="price_string">单价：</string>
+    <string name="sell_string">售</string>
+    <string name="delete">删除</string>
+    <string name="amount_string">库存：</string>
+    <string name="sales_times_string">售出次数：</string>
+</resources>

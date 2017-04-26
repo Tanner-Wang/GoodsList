@@ -40,10 +40,10 @@
     <string name="editor_update_goods_failed">Error with updating goods</string>
 
     <!-- Dialog message when user is leaving editor but hasn't saved changes [CHAR LIMIT=NONE] -->
-    <string name="unsaved_changes_dialog_msg">Discard your changes and quit editing?</string>
+    <string name="unsaved_changes_dialog_msg" translatable="false">Discard your changes and quit editing?</string>
 
     <!-- Dialog button text for the option to discard a user's changes [CHAR LIMIT=20] -->
-    <string name="discard">Discard</string>
+    <string name="discard" translatable="false">Discard</string>
 
     <!-- Dialog button text for the option to keep editing the current goods [CHAR LIMIT=20] -->
     <string name="keep_editing">Keep Editing</string>
@@ -67,13 +67,11 @@
     <string name="cancel">Cancel</string>
 
     <!-- Label for overview category of attributes in the editor [CHAR LIMIT=30] -->
-    <string name="category_overview">Overview</string>
+    <string name="category_overview" translatable="false">Overview</string>
 
-    <!-- Label for gender information in the editor [CHAR LIMIT=30] -->
-    <string name="category_gender">Gender</string>
 
     <!-- Label for measurement information in the editor [CHAR LIMIT=30] -->
-    <string name="category_measurement">Measurement</string>
+    <string name="category_measurement" translatable="false">Measurement</string>
 
     <!-- Text hint for name field in the editor [CHAR LIMIT=30] -->
     <string name="hint_goods_name">Name</string>
@@ -91,21 +89,21 @@
     <string name="hint_goods_price">price</string>
 
     <!-- Units for price of the goods (dollars) [CHAR LIMIT=5] -->
-    <string name="unit_goods_price">$</string>
+    <string name="unit_goods_price" translatable="false">$</string>
 
     <!-- Text for sales volume field in the editor [CHAR LIMIT=30] -->
-    <string name="text_goods_sales_volume">time(s) sell</string>
+    <string name="text_goods_sales_volume" translatable="false">time(s) sell</string>
 
     <!-- Text for sales volume field in the editor [CHAR LIMIT=30] -->
-    <string name="show_goods_sales_volume">0</string>
+    <string name="show_goods_sales_volume" translatable="false">0</string>
 
     <string name="amount_string">amount:</string>
-    <string name="price_string">  price:</string>
-    <string name="dollar_string">$</string>
-    <string name="sales_times_string">  sales time(s):</string>
+    <string name="price_string">price:</string>
+    <string name="dollar_string" translatable="false">$</string>
+    <string name="sales_times_string">sales time(s):</string>
     <string name="sell_string">SELL</string>
-    <string name="the_number_0">0</string>
-    <string name="times_sell_string">  time(s) sell</string>
+    <string name="the_number_0" translatable="false">0</string>
+    <string name="times_sell_string" translatable="false">  time(s) sell</string>
     <string name="order_string">ORDER</string>
     <string name="add_new_goods_button">NEW</string>
 
