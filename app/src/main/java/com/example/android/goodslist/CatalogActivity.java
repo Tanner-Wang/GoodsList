@@ -62,7 +62,6 @@ public class CatalogActivity extends AppCompatActivity implements android.app.Lo
             }
         });
 
-
         getLoaderManager().initLoader(GOODS_LOADER, null, this);
     }
 
@@ -71,7 +70,6 @@ public class CatalogActivity extends AppCompatActivity implements android.app.Lo
         ListView goodsListView;
         View emptyView;
     }
-
 
     @Override
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {

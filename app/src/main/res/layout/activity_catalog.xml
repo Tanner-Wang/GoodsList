@@ -53,10 +53,9 @@
         android:layout_height="@dimen/fab_button_height"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
-        android:layout_margin="@dimen/fab_margin"
-        android:layout_marginBottom="@dimen/activity_margin"
-        android:layout_marginRight="@dimen/activity_margin"
-        android:background="@color/colorAccent"
+        android:layout_marginBottom="@dimen/fab_margin_bottom"
+        android:layout_marginRight="@dimen/fab_margin_right"
+        android:background="@drawable/text_view_style"
         android:gravity="center"
         android:text="@string/add_new_goods_button" />
 </RelativeLayout>

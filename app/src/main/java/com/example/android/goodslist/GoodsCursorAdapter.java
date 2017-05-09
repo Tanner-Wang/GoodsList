@@ -28,7 +28,6 @@ public class GoodsCursorAdapter extends CursorAdapter {
         return LayoutInflater.from(context).inflate(R.layout.list_item, parent, false);
     }
 
-
     @Override
     public void bindView(View view, final Context context, Cursor cursor) {
 
@@ -73,14 +72,12 @@ public class GoodsCursorAdapter extends CursorAdapter {
             }
         });
 
-
         // Update the TextViews with the attributes for the current goods
         nameTextView.setText(goodsName);
         amountTextView.setText(goodsAmount);
         priceTextView.setText(goodsPrice);
         salesVolumeTextView.setText(goodsSalesVolume);
         pictureImageView.setImageBitmap(bmpout);
-
 
     }
 

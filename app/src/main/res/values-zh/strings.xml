@@ -5,7 +5,7 @@
     <string name="action_delete_all_entries">删除所有</string>
     <string name="action_insert_new_goods">插入新货物</string>
     <string name="action_save">保存</string>
-    <string name="add_new_goods_button">新建</string>
+    <string name="add_new_goods_button">添加</string>
     <string name="cancel">取消</string>
     <string name="delete_dialog_msg1">删除此货物？</string>
     <string name="delete_dialog_msg2">删除所有？</string>
@@ -18,12 +18,12 @@
     <string name="editor_update_goods_failed">更新出错</string>
     <string name="editor_update_goods_successful">已更新</string>
     <string name="empty_view_subtitle_text">开始添加新货物</string>
-    <string name="empty_view_title_text">这里有点冷清...</string>
+    <string name="empty_view_title_text">这里有点冷清…</string>
     <string name="hint_add_goods_amount">入货量</string>
     <string name="hint_cut_back_goods_amount">出货量</string>
     <string name="hint_goods_amount">库存</string>
     <string name="hint_goods_name">名称</string>
-    <string name="hint_goods_price">单价</string>
+    <string name="hint_goods_price">单价/￥</string>
     <string name="keep_editing">继续编辑</string>
     <string name="order_string">下单</string>
     <string name="price_string">单价：</string>
@@ -31,4 +31,16 @@
     <string name="delete">删除</string>
     <string name="amount_string">库存：</string>
     <string name="sales_times_string">售出次数：</string>
+    <string name="add_picture_button">图片</string>
+    <string name="warning_amount_not_null">货物库存不能为空！</string>
+    <string name="warning_image_not_null">货物图片不能为空！</string>
+    <string name="warning_name_not_null">货物名称不能为空！</string>
+    <string name="warning_price_not_null">货物价格不能为空！</string>
+    <string name="discard" >放弃</string>
+    <string name="unsaved_changes_dialog_msg">放弃更改并退出编辑吗？</string>
+    <string name="image_preview">图片预览</string>
+    <string name="warning_not_image_to_show">没有图片展示！</string>
+    <string name="alert_message">需要外部存储许可</string>
+    <string name="alert_title">需要许可</string>
+    <string name="amount_toast">库存小于0</string>
 </resources>

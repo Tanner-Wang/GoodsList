@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- Name for the application [CHAR LIMIT=12] -->
-    <string name="app_name">Goods List</string>
+    <string name="app_name">Goods List</string>￥
 
     <!-- Label for overflow menu option that inserts fake pet data into the app [CHAR LIMIT=20] -->
     <string name="action_insert_new_goods">Insert A New Goods</string>
@@ -40,10 +40,10 @@
     <string name="editor_update_goods_failed">Error with updating goods</string>
 
     <!-- Dialog message when user is leaving editor but hasn't saved changes [CHAR LIMIT=NONE] -->
-    <string name="unsaved_changes_dialog_msg" translatable="false">Discard your changes and quit editing?</string>
+    <string name="unsaved_changes_dialog_msg">Discard your changes and quit editing?</string>
 
     <!-- Dialog button text for the option to discard a user's changes [CHAR LIMIT=20] -->
-    <string name="discard" translatable="false">Discard</string>
+    <string name="discard">Discard</string>
 
     <!-- Dialog button text for the option to keep editing the current goods [CHAR LIMIT=20] -->
     <string name="keep_editing">Keep Editing</string>
@@ -70,9 +70,6 @@
     <string name="category_overview" translatable="false">Overview</string>
 
 
-    <!-- Label for measurement information in the editor [CHAR LIMIT=30] -->
-    <string name="category_measurement" translatable="false">Measurement</string>
-
     <!-- Text hint for name field in the editor [CHAR LIMIT=30] -->
     <string name="hint_goods_name">Name</string>
 
@@ -86,10 +83,10 @@
     <string name="hint_cut_back_goods_amount">Cut back to amount</string>
 
     <!-- Text hint for price field in the editor [CHAR LIMIT=30] -->
-    <string name="hint_goods_price">price</string>
+    <string name="hint_goods_price">price/￥</string>
 
     <!-- Units for price of the goods (dollars) [CHAR LIMIT=5] -->
-    <string name="unit_goods_price" translatable="false">$</string>
+    <string name="unit_goods_price" translatable="false">￥</string>
 
     <!-- Text for sales volume field in the editor [CHAR LIMIT=30] -->
     <string name="text_goods_sales_volume" translatable="false">time(s) sell</string>
@@ -99,12 +96,21 @@
 
     <string name="amount_string">amount:</string>
     <string name="price_string">price:</string>
-    <string name="dollar_string" translatable="false">$</string>
+    <string name="dollar_string" translatable="false">￥</string>
     <string name="sales_times_string">sales time(s):</string>
     <string name="sell_string">SELL</string>
     <string name="the_number_0" translatable="false">0</string>
     <string name="times_sell_string" translatable="false">  time(s) sell</string>
     <string name="order_string">ORDER</string>
     <string name="add_new_goods_button">NEW</string>
-
+    <string name="add_picture_button">Picture</string>
+    <string name="warning_name_not_null">Goods\' name cannot be null!</string>
+    <string name="warning_amount_not_null">Goods\' amount cannot be null!</string>
+    <string name="warning_price_not_null">Goods\' price cannot be null!</string>
+    <string name="warning_image_not_null">Goods\' picture cannot be null!</string>
+    <string name="warning_not_image_to_show">No image to show!</string>
+    <string name="image_preview">Image Preview</string>
+    <string name="amount_toast">The amount is less than 0.</string>
+    <string name="alert_title">Permission necessary</string>
+    <string name="alert_message">External storage permission is necessary</string>
 </resources>

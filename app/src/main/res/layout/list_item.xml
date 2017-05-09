@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="@dimen/list_item_height"
     android:orientation="horizontal"
-    android:paddingBottom="@dimen/standard_padding"
+    android:paddingBottom="@dimen/standard_padding_and_margin"
     android:paddingLeft="@dimen/activity_margin"
     android:paddingRight="@dimen/activity_margin"
     android:paddingTop="@dimen/activity_margin">
@@ -12,17 +12,23 @@
         android:id="@+id/list_goods_picture"
         android:layout_width="@dimen/list_image"
         android:layout_height="@dimen/list_image"
-        android:scaleType="centerCrop"/>
+        android:layout_gravity="center_vertical"
+        android:scaleType="centerCrop" />
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/item_size"
-        android:layout_marginLeft="@dimen/activity_margin">
+        android:layout_height="match_parent"
+        android:layout_marginStart="@dimen/activity_margin">
 
         <TextView
             android:id="@+id/name"
-            style="@style/ListItemStyle"
-            android:layout_centerHorizontal="true" />
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:ellipsize="end"
+            android:fontFamily="sans-serif-height"
+            android:maxLines="1"
+            android:textSize="18sp" />
 
         <TextView
             android:id="@+id/mAmount"
@@ -34,7 +40,7 @@
             android:id="@+id/amount"
             style="@style/ListItemStyle"
             android:layout_below="@id/name"
-            android:layout_toRightOf="@id/mAmount" />
+            android:layout_toEndOf="@id/mAmount" />
 
         <TextView
             android:id="@+id/mPrice"
@@ -46,13 +52,13 @@
             android:id="@+id/price"
             style="@style/ListItemStyle"
             android:layout_below="@id/amount"
-            android:layout_toRightOf="@id/mPrice" />
+            android:layout_toEndOf="@id/mPrice" />
 
         <TextView
             android:id="@+id/dollar"
             style="@style/ListItemStyle"
             android:layout_below="@id/amount"
-            android:layout_toRightOf="@id/price"
+            android:layout_toEndOf="@id/price"
             android:text="@string/dollar_string" />
 
         <TextView
@@ -65,17 +71,18 @@
             android:id="@+id/sell"
             style="@style/ListItemStyle"
             android:layout_below="@id/mPrice"
-            android:layout_toRightOf="@id/mSell" />
+            android:layout_toEndOf="@id/mSell" />
 
         <TextView
             android:id="@+id/to_sell"
             android:layout_width="@dimen/sell_button_width"
             android:layout_height="@dimen/sell_button_height"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentRight="true"
-            android:background="@color/colorAccent"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/text_view_style"
             android:gravity="center"
-            android:text="@string/sell_string" />
+            android:text="@string/sell_string"
+            android:textSize="@dimen/list_item_sell_button_textSize" />
 
     </RelativeLayout>
 

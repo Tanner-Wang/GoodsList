@@ -39,6 +39,7 @@ import java.io.IOException;
 public class EditorActivity extends AppCompatActivity implements android.app.LoaderManager.LoaderCallbacks<Cursor> {
 
     ViewHolder holder;
+    private int calculateFinishOrNot;
 
     /**
      * Identifier for the goods data loader
@@ -55,7 +56,7 @@ public class EditorActivity extends AppCompatActivity implements android.app.Loa
      */
     private boolean mGoodsHasChanged = false;
 
-    private int REQUEST_CAMERA = 0, SELECT_FILE = 1;
+    private final int REQUEST_CAMERA = 0, SELECT_FILE = 1;
     private String userChoosenTask;
 
     private View.OnTouchListener mTouchListener = new View.OnTouchListener() {
@@ -103,12 +104,14 @@ public class EditorActivity extends AppCompatActivity implements android.app.Loa
         holder.mOrderButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String[] address = {"manager@gmail.com"};
                 Intent intent1 = new Intent(Intent.ACTION_SENDTO);
                 intent1.setData(Uri.parse("mailto:"));
-                intent1.putExtra(Intent.EXTRA_EMAIL, "manager@gmail.com");
+                intent1.putExtra(Intent.EXTRA_EMAIL, address);
                 intent1.putExtra(Intent.EXTRA_SUBJECT, "Order Summary");
-                intent1.putExtra(Intent.EXTRA_TEXT, "Goods' name:" + holder.mNameEditText.getText()
-                        + "\nOrderAmount:" + holder.mCutBackAmountEditText.getText());
+                intent1.putExtra(Intent.EXTRA_TEXT, "Goods' name : " + holder.mNameEditText.getText()
+                        + "\nOrderAmount : " + holder.mCutBackAmountEditText.getText()
+                        + "\nYou can tell us something else down here : ");
                 if (intent1.resolveActivity(getPackageManager()) != null) {
                     startActivity(intent1);
                 }
@@ -125,6 +128,21 @@ public class EditorActivity extends AppCompatActivity implements android.app.Loa
         });
         holder.ivImage = (ImageView) findViewById(R.id.goods_picture);
 
+        holder.ivImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent2 = new Intent(EditorActivity.this,ShowImageActivity.class);
+                if (holder.ivImage.getDrawable() == null) {
+                    Toast.makeText(EditorActivity.this, R.string.warning_not_image_to_show, Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                Bitmap TheBitmap =  ((BitmapDrawable) holder.ivImage.getDrawable()).getBitmap();
+                byte[] buff = img(TheBitmap);
+                intent2.putExtra("image",buff);
+                startActivity(intent2);
+            }
+        });
+
 //         Setup OnTouchListeners on all the input fields, so we can determine if the user
 //         has touched or modified them. This will let us know if there are unsaved changes
 //         or not, if the user tries to leave the editor without saving.
@@ -133,8 +151,6 @@ public class EditorActivity extends AppCompatActivity implements android.app.Loa
         holder.mPriceEditText.setOnTouchListener(mTouchListener);
         holder.mAddAmountEditText.setOnTouchListener(mTouchListener);
         holder.mCutBackAmountEditText.setOnTouchListener(mTouchListener);
-
-
     }
 
     private static class ViewHolder {
@@ -205,7 +221,6 @@ public class EditorActivity extends AppCompatActivity implements android.app.Loa
         }
     }
 
-
     @Override
     public void onLoaderReset(android.content.Loader<Cursor> loader) {
 
@@ -219,8 +234,9 @@ public class EditorActivity extends AppCompatActivity implements android.app.Loa
         holder.ivImage.setImageBitmap(null);
     }
 
-
     private void saveGoods() {
+
+        calculateFinishOrNot = 0;
         // Read from input fields
         // Use trim to eliminate leading or trailing white space
         String nameString = holder.mNameEditText.getText().toString().trim();
@@ -229,34 +245,42 @@ public class EditorActivity extends AppCompatActivity implements android.app.Loa
         String salesVolumeString = holder.mSalesVolume.getText().toString().trim();
 
         if (TextUtils.isEmpty(nameString)) {
-            Toast.makeText(this, "Goods' name cannot be null!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.warning_name_not_null, Toast.LENGTH_SHORT).show();
             return;
         }
+        calculateFinishOrNot += 1;
         if (TextUtils.isEmpty(amountString)) {
-            Toast.makeText(this, "Goods' amount cannot be null!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.warning_amount_not_null, Toast.LENGTH_SHORT).show();
             return;
         }
+        calculateFinishOrNot += 1;
         if (TextUtils.isEmpty(priceString)) {
-            Toast.makeText(this, "Goods' price cannot be null!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.warning_price_not_null, Toast.LENGTH_SHORT).show();
             return;
         }
-        if (TextUtils.isEmpty(salesVolumeString)) {
-            Toast.makeText(this, "Goods' salesVolume cannot be null!", Toast.LENGTH_SHORT).show();
-            return;
-        }
+        calculateFinishOrNot += 1;
+
         //与字符串的空检测不同，图片的空检测应该先调用getDrawable()，
         //如果结果不为空，再调用getBitmap()，因为有可能在调用getBitmap()而结果为空的时候导致应用崩溃。
         if (holder.ivImage.getDrawable() == null) {
-            Toast.makeText(this, "Goods' picture cannot be null!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.warning_image_not_null, Toast.LENGTH_SHORT).show();
             return;
         }
+        calculateFinishOrNot += 1;
+
         Bitmap bitmap = ((BitmapDrawable) holder.ivImage.getDrawable()).getBitmap();
 
         String addString = holder.mAddAmountEditText.getText().toString().trim();
         String cutBackString = holder.mCutBackAmountEditText.getText().toString().trim();
         int amountInt = Integer.parseInt(amountString);
-        int addInt = Integer.parseInt(addString);
-        int cutBackInt = Integer.parseInt(cutBackString);
+        int addInt=0,cutBackInt=0;
+
+        if (!addString.equals("")) {
+            addInt = Integer.parseInt(addString);
+        }
+        if (!cutBackString.equals("")) {
+            cutBackInt = Integer.parseInt(cutBackString);
+        }
         if (addInt > 0) {
             amountInt += addInt;
         }
@@ -264,7 +288,6 @@ public class EditorActivity extends AppCompatActivity implements android.app.Loa
             amountInt -= cutBackInt;
             salesVolumeString += 1;
         }
-
 
         // Check if this is supposed to be a new goods
         // and check if all the fields in the editor are blank
@@ -276,10 +299,10 @@ public class EditorActivity extends AppCompatActivity implements android.app.Loa
             return;
         }
         if (amountInt < 0) {
-            Toast.makeText(this, "The amount is less than 0", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.amount_toast, Toast.LENGTH_SHORT).show();
             return;
         }
-
+        calculateFinishOrNot += 1;
         byte[] imgByte = img(bitmap);
 
         // Create a ContentValues object where column names are the keys,
@@ -367,8 +390,10 @@ public class EditorActivity extends AppCompatActivity implements android.app.Loa
             case R.id.action_save:
                 //插入货物信息
                 saveGoods();
+                if (calculateFinishOrNot==5){
                 //退出EditorActivity，然后返回原Activity
                 finish();
+                }
                 return true;
             // Respond to a click on the "Delete" menu option
             case R.id.action_delete:
@@ -520,27 +545,27 @@ public class EditorActivity extends AppCompatActivity implements android.app.Loa
     }
 
     private void selectImage() {
-        final CharSequence[] items = {"Take Photo", "Choose from Library",
-                "Cancel"};
+        final CharSequence[] items = {"拍照", "相册",
+                "取消"};
 
         AlertDialog.Builder builder = new AlertDialog.Builder(EditorActivity.this);
-        builder.setTitle("Add Photo!");
+        builder.setTitle("添加图片");
         builder.setItems(items, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int item) {
                 boolean result = Utility.checkPermission(EditorActivity.this);
 
-                if (items[item].equals("Take Photo")) {
-                    userChoosenTask = "Take Photo";
+                if (items[item].equals("拍照")) {
+                    userChoosenTask = "拍照";
                     if (result)
                         cameraIntent();
 
-                } else if (items[item].equals("Choose from Library")) {
-                    userChoosenTask = "Choose from Library";
+                } else if (items[item].equals("相册")) {
+                    userChoosenTask = "相册";
                     if (result)
                         galleryIntent();
 
-                } else if (items[item].equals("Cancel")) {
+                } else if (items[item].equals("取消")) {
                     dialog.dismiss();
                 }
             }
