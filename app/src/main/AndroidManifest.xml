@@ -24,7 +24,8 @@
             android:name=".EditorActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:parentActivityName=".CatalogActivity"
-            android:theme="@style/EditorTheme">
+            android:theme="@style/EditorTheme"
+            android:windowSoftInputMode="stateHidden">
 
             <!-- Parent activity meta-data to support 4.0 and lower -->
             <meta-data

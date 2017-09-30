@@ -38,7 +38,7 @@ import java.io.IOException;
 
 public class EditorActivity extends AppCompatActivity implements android.app.LoaderManager.LoaderCallbacks<Cursor> {
 
-    ViewHolder holder;
+    private ViewHolder holder;
     private int calculateFinishOrNot;
 
     /**
@@ -57,6 +57,7 @@ public class EditorActivity extends AppCompatActivity implements android.app.Loa
     private boolean mGoodsHasChanged = false;
 
     private final int REQUEST_CAMERA = 0, SELECT_FILE = 1;
+
     private String userChoosenTask;
 
     private View.OnTouchListener mTouchListener = new View.OnTouchListener() {
@@ -76,18 +77,6 @@ public class EditorActivity extends AppCompatActivity implements android.app.Loa
 
         Intent intent = getIntent();
         mCurrentGoodsUri = intent.getData();
-
-        if (mCurrentGoodsUri == null) {
-            setTitle(getString(R.string.editor_activity_title_new_goods));
-            // Invalidate the options menu, so the "Delete" menu option can be hidden.
-            // (It doesn't make sense to delete a goods that hasn't been created yet.)
-            invalidateOptionsMenu();
-        } else {
-            setTitle(getString(R.string.editor_activity_title_edit_goods));
-            // Initialize a loader to read the goods data from the database
-            // and display the current values in the editor
-            getLoaderManager().initLoader(EXISTING_GOODS_LOADER, null, this);
-        }
 
         // Find all relevant views that we will need to read user input from
         holder.mNameEditText = (EditText) findViewById(R.id.edit_goods_name);
@@ -143,6 +132,20 @@ public class EditorActivity extends AppCompatActivity implements android.app.Loa
             }
         });
 
+        if (mCurrentGoodsUri == null) {
+            setTitle(getString(R.string.editor_activity_title_new_goods));
+            // Invalidate the options menu, so the "Delete" menu option can be hidden.
+            // (It doesn't make sense to delete a goods that hasn't been created yet.)
+            invalidateOptionsMenu();
+            holder.btnSelect.setText(R.string.add_a_picture);
+        } else {
+            setTitle(getString(R.string.editor_activity_title_edit_goods));
+            // Initialize a loader to read the goods data from the database
+            // and display the current values in the editor
+            holder.btnSelect.setText(R.string.change_picture);
+            getLoaderManager().initLoader(EXISTING_GOODS_LOADER, null, this);
+        }
+
 //         Setup OnTouchListeners on all the input fields, so we can determine if the user
 //         has touched or modified them. This will let us know if there are unsaved changes
 //         or not, if the user tries to leave the editor without saving.
@@ -153,7 +156,7 @@ public class EditorActivity extends AppCompatActivity implements android.app.Loa
         holder.mCutBackAmountEditText.setOnTouchListener(mTouchListener);
     }
 
-    private static class ViewHolder {
+    static class ViewHolder {
         EditText mNameEditText;
         EditText mAmountEditText;
         EditText mPriceEditText;
@@ -359,15 +362,6 @@ public class EditorActivity extends AppCompatActivity implements android.app.Loa
     }
 
     /**
-     * This method is called to Convert the image into bytecode.
-     */
-    public byte[] img(Bitmap bitmap) {
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.JPEG, 90, baos);
-        return baos.toByteArray();
-    }
-
-    /**
      * This method is called after invalidateOptionsMenu(), so that the
      * menu can be updated (some menu items can be hidden or made visible).
      */
@@ -448,6 +442,15 @@ public class EditorActivity extends AppCompatActivity implements android.app.Loa
 
         // Show dialog that there are unsaved changes
         showUnsavedChangesDialog(discardButtonClickListener);
+    }
+
+    /**
+     * This method is called to Convert the image into bytecode.
+     */
+    public byte[] img(Bitmap bitmap) {
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 90, baos);
+        return baos.toByteArray();
     }
 
     private void showUnsavedChangesDialog(

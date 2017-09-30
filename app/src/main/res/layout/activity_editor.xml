@@ -35,8 +35,7 @@
                 android:paddingBottom="@dimen/standard_padding_and_margin"
                 android:paddingEnd="@dimen/add_picture_button_padding_leftAndRight"
                 android:paddingStart="@dimen/add_picture_button_padding_leftAndRight"
-                android:paddingTop="@dimen/standard_padding_and_margin"
-                android:text="@string/add_picture_button" />
+                android:paddingTop="@dimen/standard_padding_and_margin" />
 
         </LinearLayout>
 
